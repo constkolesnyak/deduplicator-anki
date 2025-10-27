@@ -6,6 +6,7 @@ from aqt.qt import *
 class CheckableComboBox(QComboBox):
     # Subclass Delegate to increase item height
     changed = pyqtSignal(str)
+
     class Delegate(QStyledItemDelegate):
         def sizeHint(self, option, index):
             size = super().sizeHint(option, index)
@@ -57,8 +58,6 @@ class CheckableComboBox(QComboBox):
             if event.type() == QMouseEvent.Type.MouseButtonRelease:
                 index = self.view().indexAt(event.pos())
                 item = self.model().item(index.row())
-
-
 
                 if item.checkState() == Qt.CheckState.Checked:
                     item.setCheckState(Qt.CheckState.Unchecked)

@@ -1,14 +1,19 @@
 # import the main window object (mw)from aqt
-from aqt import mw
-# import the "show info" tool from utils.py
-from aqt.utils import showInfo
-# import all of the Qt GUI library
-from aqt.qt import *
 # from PyQt5.QtWidgets import QApplication, QWidget, QComboBox, QFontComboBox, QLineEdit, QMessageBox, QVBoxLayout, QLabel, QFormLayout, QTextEdit
 # We're going to add a menu item below. First we want to create a function to
 # be called when the menu item is activated.
 from collections import defaultdict
+
+from aqt import mw
+
+# import all of the Qt GUI library
+from aqt.qt import *
+
+# import the "show info" tool from utils.py
+from aqt.utils import showInfo
+
 from .checkable_combobox import CheckableComboBox
+
 
 class DuplicateConfigWindow(QWidget):
     selectedDecks = None
@@ -106,15 +111,17 @@ class DuplicateConfigWindow(QWidget):
                     if type(k) is tuple:
                         k = "(combined keys)"
                     (noteId, min_due) = v[0]
-                    for (noteId1, due1) in v:
+                    for noteId1, due1 in v:
                         if (keep_old and due1 < min_due) or (keep_old == False and due1 > min_due):
                             noteId = noteId1
                             min_due = due1
-                    for (noteId1, due1) in v:
+                    for noteId1, due1 in v:
                         if execute and noteId1 != noteId:
                             mw.col.remNotes([noteId1])
                             total = total + 1
-                            self.console.append(k + ": note_id:" + str(noteId1) + " due:" + str(due1) + " X done")
+                            self.console.append(
+                                k + ": note_id:" + str(noteId1) + " due:" + str(due1) + " X done"
+                            )
                         elif execute == False and noteId1 == noteId:
                             self.console.append(k + ": note_id:" + str(noteId1) + " due:" + str(due1))
                         elif execute == False:
