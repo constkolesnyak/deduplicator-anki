@@ -1,0 +1,11 @@
+{
+  "package": "deduplicator",
+  "name": "Deduplicator",
+  "version": "2.0.0",
+  "author": "",
+  "homepage": "",
+  "conflicts": [],
+  "mod": 0,
+  "min_point_version": 45,
+  "max_point_version": 0
+}
